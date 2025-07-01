@@ -55,7 +55,7 @@
   }
 }
 
-@media (max-width: 640px;) {
+@media (max-width: 640px) {
   .top {
     padding: 120px 16px;
   }
