@@ -1,48 +1,29 @@
+//cssを読み込むための基本設定
 import styles from "./page.module.css";
+//画像データを読み込むための基本設定
 import Image from "next/image";
 
+//ニュースリストのAPIの読み込み
+import { getNewsList } from "@/app/_libs/microcms";
+
+//ニュースリストの上限設定の読み込み
+import { TOP_NEWS_LIMIT } from "@/app/_constants";
+
+//ニュースリスト部分のパーツ読み込み
 import NewsList from "@/app/_components/NewsList";
+//ボタン部分のパーツ読み込み
 import ButtonLink from "@/app/_components/ButtonLink";
-import { News } from "@/app/_libs/microcms";
 
-const date: {
-  contents: News[];
-} = {
-  contents: [
-    {
-      id: "1",
-      title: "渋谷にオフィスを移転しました",
-      category: {
-        name: "更新情報",
-      },
-      publishedAt: "2025/06/30",
-      createdAt: "2025/06/30",
-    },
-    {
-      id: "2",
-      title: "当社CEOが業界リーダーTOP30に選出されました",
-      category: {
-        name: "更新情報",
-      },
-      publishedAt: "2025/06/30",
-      createdAt: "2025/06/30",
-    },
-    {
-      id: "3",
-      title: "テストの記事です",
-      category: {
-        name: "更新情報",
-      },
-      publishedAt: "2026/4/30",
-      createdAt: "2026/04/30",
-    },
-  ],
-};
+//↓↓↓↓↓↓↓↓TOPページでのHTMLの記述箇所↓↓↓↓↓↓↓↓
+export default async function Home() {
+  //ニュースリスト上限は「TOP_NEWS_LIMIT」を参照してくださいの意
+  //「const」は宣言の意
+  const date = await getNewsList({
+    limit: TOP_NEWS_LIMIT,
+  });
 
-export default function Home() {
-  const sliceDate = date.contents.slice(0, 2);
-  //const sliceDate: News = [];
   return (
+    //↓↓↓↓↓↓↓↓単一のHTMLしか読み込めないので「<>」で囲う↓↓↓↓↓↓↓↓
     <>
       <section className={styles.top}>
         <div>
@@ -51,6 +32,7 @@ export default function Home() {
             私たちは市場をリードしているグローバルカンパニーです。
           </p>
         </div>
+        {/* 画像は下記のように読み込む。サイズの数字はその比率でウィンドウ幅によって調整してくれる。 */}
         <Image
           className={styles.bgimg}
           src="/img-mv.jpg"
@@ -62,9 +44,10 @@ export default function Home() {
 
       <section className={styles.news}>
         <h2 className={styles.newsTitle}>News</h2>
-        <NewsList news={sliceDate} />
+        <NewsList news={date.contents} />
         <div className={styles.newsLink}>
           <ButtonLink href="/news">もっとみす</ButtonLink>
+          {/*「ButtonLink」タグはコンポーネントされる「ButtonLink/index.tsx」内の「return」以下の要素と合体する*/}
         </div>
       </section>
     </>

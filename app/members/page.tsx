@@ -1,46 +1,17 @@
 import Image from "next/image";
+
+//「microcms.ts」にて読み込んだAPI読み込み設定の読み込み
+import { getMemberList } from "@/app/_libs/microcms";
+
+//「_constants/index.ts」にて作成した表示上限の読み込み
+import { MEMBERS_LIST_LIMIT } from "@/app/_constants";
+
 import styles from "./page.module.css";
 
-const date = {
-  contents: [
-    {
-      id: 1,
-      image: {
-        url: "/img-member1.jpg",
-        width: 240,
-        height: 240,
-      },
-      name: "デイビットちゃん",
-      position: "CEO",
-      profile: "グローバルカンパニーでうんたらかんたら～",
-    },
-    {
-      id: 2,
-      image: {
-        url: "/img-member2.jpg",
-        width: 240,
-        height: 240,
-      },
-      name: "エミリーちゃん",
-      position: "CEO",
-      profile: "うんたらかんたらうんたらかんたらうんたらかんたら",
-    },
-    {
-      id: 3,
-      image: {
-        url: "/img-member3.jpg",
-        width: 240,
-        height: 240,
-      },
-      name: "ちゃんちゃんちゃん",
-      position: "CEO",
-      profile:
-        "ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト",
-    },
-  ],
-};
+export default async function Page() {
+  //メンバーリスト上限は「MEMBERS_LIST_LIMIT」を参照してくださいの意
+  const date = await getMemberList({ limit: MEMBERS_LIST_LIMIT });
 
-export default function Page() {
   return (
     <div className={styles.container}>
       {date.contents.length === 0 ? (

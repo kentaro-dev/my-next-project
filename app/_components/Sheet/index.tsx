@@ -1,3 +1,5 @@
+//ページの余白などを共通化するためのファイル
+
 import styles from "./index.module.css";
 
 type Props = {

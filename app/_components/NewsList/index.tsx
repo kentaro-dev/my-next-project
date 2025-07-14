@@ -18,14 +18,25 @@ export default function NewsList({ news }: Props) {
     <ul>
       {news.map((article) => (
         <li key={article.id} className={styles.list}>
-          <Link href={"/news/${article.id}"} className={styles.link}>
-            <Image
-              className={styles.image}
-              src="/no-image.png"
-              alt="NoImage"
-              width={1200}
-              height={630}
-            />
+          <Link href={`/news/${article.id}`} className={styles.link}>
+            {article.thumbnail ? (
+              <Image
+                className={styles.image}
+                src={article.thumbnail.url}
+                alt=""
+                width={article.thumbnail.width}
+                height={article.thumbnail.height}
+              />
+            ) : (
+              <Image
+                className={styles.image}
+                src="/no-image.png"
+                alt="NoImage"
+                width={1200}
+                height={630}
+              />
+            )}
+
             <dl className={styles.content}>
               <dt className={styles.title}>{article.title}</dt>
               <dd className={styles.meta}>
