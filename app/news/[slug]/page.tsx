@@ -12,10 +12,22 @@ type Props = {
   params: {
     slug: string;
   };
+
+  /*
+  
+  以下、プレビュー画面の設定
+  URLに下書きキー（dk）が含まれているかどうかで下書きを表示するか判定する
+  
+  */
+  searchParams: {
+    dk?: string;
+  };
 };
 
-export default async function Page({ params }: Props) {
-  const data = await getNewsDetail(params.slug).catch(notFound);
+export default async function Page({ params, searchParams }: Props) {
+  const data = await getNewsDetail(params.slug, {
+    draftKey: searchParams.dk,
+  }).catch(notFound);
 
   return (
     <>

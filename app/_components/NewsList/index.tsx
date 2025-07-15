@@ -1,10 +1,16 @@
-import Image from "next/image";
-import Link from "next/link";
+/*
 
-import styles from "./index.module.css";
-import Category from "../Category";
-import Date from "../Date";
-import { News } from "@/app/_libs/microcms";
+ニュース一覧のニュースの各見出し部分の構成
+
+*/
+
+import Image from 'next/image';
+import Link from 'next/link';
+
+import styles from './index.module.css';
+import Category from '../Category';
+import Date from '../Date';
+import { News } from '@/app/_libs/microcms';
 
 type Props = {
   news: News[];
@@ -23,15 +29,15 @@ export default function NewsList({ news }: Props) {
               <Image
                 className={styles.image}
                 src={article.thumbnail.url}
-                alt=""
+                alt=''
                 width={article.thumbnail.width}
                 height={article.thumbnail.height}
               />
             ) : (
               <Image
                 className={styles.image}
-                src="/no-image.png"
-                alt="NoImage"
+                src='/no-image.png'
+                alt='NoImage'
                 width={1200}
                 height={630}
               />

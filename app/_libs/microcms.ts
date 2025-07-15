@@ -1,11 +1,11 @@
 //↓↓↓↓↓↓↓↓↓↓↓↓microCMSとの連携をする為の公式ソフトウェア開発キット（SDK）の読み込み設定↓↓↓↓↓↓↓↓↓↓↓↓
-import { createClient } from "microcms-js-sdk";
+import { createClient } from 'microcms-js-sdk';
 
 import type {
   MicroCMSQueries,
   MicroCMSImage,
   MicroCMSListContent,
-} from "microcms-js-sdk";
+} from 'microcms-js-sdk';
 
 //↑↑↑↑↑↑↑↑↑↑↑↑microCMSとの連携をする為の公式ソフトウェア開発キット（SDK）の読み込み設定↑↑↑↑↑↑↑↑↑↑↑↑
 
@@ -40,12 +40,12 @@ export type News = {
 
 //「.env」ファイルを参照し、設定したmicroCMSのドメインが設定されているかチェック
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
-  throw new Error("MICROCMS_SERVICE_DOMAIN is required");
+  throw new Error('MICROCMS_SERVICE_DOMAIN is required');
 }
 
 //「.env」ファイルを参照し、設定したmicroCMSのAPIキーが設定されているかチェック
 if (!process.env.MICROCMS_API_KEY) {
-  throw new Error("MICROCMS_API_KEY is required");
+  throw new Error('MICROCMS_API_KEY is required');
 }
 
 //公式ソフトウェア開発キット（SDK）がmicroCMSサーバーのサービスを利用するための設定
@@ -62,7 +62,7 @@ export const getMemberList = async (queries?: MicroCMSQueries) => {
   //「get××××List」←××××の部分は独自
   const listData = await client.getList<Member>({
     //「<××××>」←××××の部分は独自
-    endpoint: "members",
+    endpoint: 'members',
     //「"××××",」←××××の部分は各APIのエンドポイント参照
     queries,
   });
@@ -71,7 +71,7 @@ export const getMemberList = async (queries?: MicroCMSQueries) => {
 
 export const getNewsList = async (queries?: MicroCMSQueries) => {
   const listData = await client.getList<News>({
-    endpoint: "news",
+    endpoint: 'news',
     queries,
   });
   return listData;
@@ -88,7 +88,7 @@ export const getNewsDetail = async (
 ) => {
   //「detailData」は独自のもの
   const detailData = await client.getListDetail<News>({
-    endpoint: "news",
+    endpoint: 'news',
 
     //再び「contentId」と記述
     contentId,
@@ -98,6 +98,20 @@ export const getNewsDetail = async (
   return detailData;
 };
 //↑↑↑↑↑↑↑↑↑↑↑↑microCMSの各API（ニュース）読み込み設定↑↑↑↑↑↑↑↑↑↑↑↑
+
+//↓↓↓↓↓↓↓↓↓↓↓↓カテゴリー名が存在するかチェックの設定↓↓↓↓↓↓↓↓↓↓↓↓
+export const getCategoryDetail = async (
+  contentId: string,
+  queries?: MicroCMSQueries
+) => {
+  const detailData = await client.getListDetail<Category>({
+    endpoint: 'categories',
+    contentId,
+    queries,
+  });
+  return detailData;
+};
+//↑↑↑↑↑↑↑↑↑↑↑↑カテゴリー名が存在するかチェックの設定↑↑↑↑↑↑↑↑↑↑↑↑
 
 //↓↓↓↓↓↓↓↓↓↓↓↓○○↓↓↓↓↓↓↓↓↓↓↓↓
 //↑↑↑↑↑↑↑↑↑↑↑↑○○↑↑↑↑↑↑↑↑↑↑↑↑
