@@ -12,7 +12,7 @@ import type {
 //↓↓↓↓↓↓↓↓↓↓↓↓microCMSの各API設定↓↓↓↓↓↓↓↓↓↓↓↓
 
 //メンバーAPI設定
-export type Menmber = {
+export type Member = {
   name: string;
   position: string;
   profile: string;
