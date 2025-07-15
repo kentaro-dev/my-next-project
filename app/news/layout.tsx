@@ -1,7 +1,5 @@
-import Hero from "@/app/_components/Hero";
-import Sheet from "@/app/_components/Sheet";
-import { Props } from "next/script";
-import React from "react";
+import Hero from '@/app/_components/Hero';
+import Sheet from '@/app/_components/Sheet';
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +8,7 @@ type Props = {
 export default function NewsLayout({ children }: Props) {
   return (
     <>
-      <Hero title="News" sub="ニュース" />
+      <Hero title='News' sub='ニュース' />
       <Sheet>{children}</Sheet>
     </>
   );
