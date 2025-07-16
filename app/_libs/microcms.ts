@@ -93,6 +93,12 @@ export const getNewsDetail = async (
     //再び「contentId」と記述
     contentId,
     queries,
+    //下記、データ単位のキャッシュ制御。ドラフトキーが設定されていれば（つまり下書きのこと）0秒キャッシュ。ドラフトキーがなければ60秒キャッシュ。
+    customRequestInit: {
+      next: {
+        revalidate: queries?.draftKey === undefined ? 60 : 0,
+      },
+    },
   });
   //「detailData」
   return detailData;
