@@ -14,7 +14,7 @@ import Footer from './_components/Footer';
 
 //以下メタデータ情報
 export const metadata: Metadata = {
-  matadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL('http://localhost:3000'),
   title: {
     //下部ページでは「 %s 」の部分にそれぞれのページで設定したタイトルが入る
     template: '%s | シンプルなコーポレートサイト',
