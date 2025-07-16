@@ -23,7 +23,7 @@ import { NEWS_LIST_LIMIT } from '@/app/_constants';
 // export const revalidate = 0;
 
 //キャッシュ保存期間を60にする。これによってレンダリング方式がISRになり、定期的にキャッシュを更新してくれる。
-export const revalidate = 60;
+// export const revalidate = 60;
 
 export default async function Page() {
   //「microcms.ts」にて読み込んだAPIを「NewsList/index.tsx」にて作成したニュースリストに合体し「contents: news」にて宣言。

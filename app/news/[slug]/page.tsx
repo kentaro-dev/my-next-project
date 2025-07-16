@@ -28,7 +28,7 @@ type Props = {
 // export const revalidate = 0;
 
 //キャッシュ保存期間を60にする。これによってレンダリング方式がISRになり、定期的にキャッシュを更新してくれる。
-export const revalidate = 60;
+// export const revalidate = 60;
 
 export default async function Page({ params, searchParams }: Props) {
   const data = await getNewsDetail(params.slug, {
