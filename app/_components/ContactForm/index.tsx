@@ -7,6 +7,11 @@
 
 'use client';
 
+//以下Googleアナリティクスでの問い合わせイベントの検知設定
+import { sendGAEvent } from '@next/third-parties/google';
+//以下Googleタグマネージャーでの問い合わせイベントの検知設定
+import { sendGTMEvent } from '@next/third-parties/google';
+
 import { createContactData } from '@/app/_actions/contact';
 import { useFormState } from 'react-dom';
 import styles from './index.module.css';
@@ -19,6 +24,19 @@ const initialState = {
 export default function ContactForm() {
   const [state, formAction] = useFormState(createContactData, initialState);
   console.log(state);
+
+  //Googleアナリティクスでの問い合わせイベントの検知設定
+  // const handleSubmit = () => {
+  //   sendGAEvent({ event: 'contact', value: 'submit' });
+  // };
+  //Googleアナリティクスでの問い合わせイベントの検知設定
+
+  //Googleタグマネージャーでの問い合わせイベントの検知設定
+  const handleSubmit = () => {
+    sendGTMEvent({ event: 'contact', value: 'submit' });
+  };
+  //Googleタグマネージャーでの問い合わせイベントの検知設定
+
   if (state.status === 'success') {
     return (
       <p className={styles.success}>
@@ -30,7 +48,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form className={styles.form} action={formAction}>
+    <form className={styles.form} action={formAction} onSubmit={handleSubmit}>
       <div className={styles.horizontal}>
         <div className={styles.item}>
           <label className={styles.label} htmlFor="lastname">

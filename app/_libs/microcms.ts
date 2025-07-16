@@ -119,5 +119,21 @@ export const getCategoryDetail = async (
 };
 //↑↑↑↑↑↑↑↑↑↑↑↑カテゴリー名が存在するかチェックの設定↑↑↑↑↑↑↑↑↑↑↑↑
 
+//↓↓↓↓↓↓↓↓↓↓↓↓サイトマップ自動生成のためにmicroCMSからニュースとカテゴリーのコンテンツを全て取得する設定↓↓↓↓↓↓↓↓↓↓↓↓
+export const getAllNewsList = async () => {
+  const listData = await client.getAllContents<News>({
+    endpoint: 'news',
+  });
+  return listData;
+};
+
+export const getAllCategoryList = async () => {
+  const listData = await client.getAllContents<Category>({
+    endpoint: 'categories',
+  });
+  return listData;
+};
+//↑↑↑↑↑↑↑↑↑↑↑↑サイトマップ自動生成のためにmicroCMSからニュースとカテゴリーのコンテンツを全て取得する設定↑↑↑↑↑↑↑↑↑↑↑↑
+
 //↓↓↓↓↓↓↓↓↓↓↓↓○○↓↓↓↓↓↓↓↓↓↓↓↓
 //↑↑↑↑↑↑↑↑↑↑↑↑○○↑↑↑↑↑↑↑↑↑↑↑↑

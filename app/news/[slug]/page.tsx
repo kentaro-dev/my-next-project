@@ -1,4 +1,12 @@
-//↓↓↓↓↓↓↓↓↓↓↓↓ニュースの記事詳細ページの読み込み↓↓↓↓↓↓↓↓↓↓↓↓
+/*
+
+ニュースの記事詳細ページ
+
+
+*/
+
+//メタデータの共通化
+import type { Metadata } from 'next';
 
 import { notFound } from 'next/navigation';
 import { getNewsDetail } from '@/app/_libs/microcms';
@@ -24,6 +32,26 @@ type Props = {
   };
 };
 
+//以下メタ情報設定。コンテンツの内容をもとに設定してくれる。
+export async function generateMetadata({
+  params,
+  searchParams,
+}: Props): Promise<Metadata> {
+  const data = await getNewsDetail(params.slug, {
+    draftKey: searchParams.dk,
+  });
+
+  return {
+    title: data.title,
+    description: data.description,
+    openGraph: {
+      title: data.title,
+      description: data.description,
+      images: [data?.thumbnail?.url ?? ''],
+    },
+  };
+}
+
 //更新反映を早めるためキャッシュ保存期間を0にする。これによってレンダリング方式がSSRになる。
 // export const revalidate = 0;
 
@@ -39,7 +67,7 @@ export default async function Page({ params, searchParams }: Props) {
     <>
       <Article data={data} />
       <div className={styles.footer}>
-        <ButtonLink href='/news'>ニュース一覧へ</ButtonLink>
+        <ButtonLink href="/news">ニュース一覧へ</ButtonLink>
       </div>
     </>
   );

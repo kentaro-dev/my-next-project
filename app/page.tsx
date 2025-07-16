@@ -41,10 +41,12 @@ export default async function Home() {
         {/* 画像は下記のように読み込む。サイズの数字はその比率でウィンドウ幅によって調整してくれる。 */}
         <Image
           className={styles.bgimg}
-          src='/img-mv.jpg'
-          alt=''
+          src="/img-mv.jpg"
+          alt=""
           width={4000}
           height={1200}
+          priority
+          sizes="100vw"
         />
       </section>
 
@@ -52,7 +54,7 @@ export default async function Home() {
         <h2 className={styles.newsTitle}>News</h2>
         <NewsList news={date.contents} />
         <div className={styles.newsLink}>
-          <ButtonLink href='/news'>もっとみす</ButtonLink>
+          <ButtonLink href="/news">もっとみす</ButtonLink>
           {/*「ButtonLink」タグはコンポーネントされる「ButtonLink/index.tsx」内の「return」以下の要素と合体する*/}
         </div>
       </section>

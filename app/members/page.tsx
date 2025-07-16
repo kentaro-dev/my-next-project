@@ -1,12 +1,12 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 //「microcms.ts」にて読み込んだAPI読み込み設定の読み込み
-import { getMemberList } from "@/app/_libs/microcms";
+import { getMemberList } from '@/app/_libs/microcms';
 
 //「_constants/index.ts」にて作成した表示上限の読み込み
-import { MEMBERS_LIST_LIMIT } from "@/app/_constants";
+import { MEMBERS_LIST_LIMIT } from '@/app/_constants';
 
-import styles from "./page.module.css";
+import styles from './page.module.css';
 
 export default async function Page() {
   //メンバーリスト上限は「MEMBERS_LIST_LIMIT」を参照してくださいの意
