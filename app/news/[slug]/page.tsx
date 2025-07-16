@@ -24,6 +24,9 @@ type Props = {
   };
 };
 
+//更新反映を早めるためキャッシュ保存期間を0にする。これによってレンダリング方式がSSRになる。
+export const revalidate = 0;
+
 export default async function Page({ params, searchParams }: Props) {
   const data = await getNewsDetail(params.slug, {
     draftKey: searchParams.dk,

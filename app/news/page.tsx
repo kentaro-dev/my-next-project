@@ -19,6 +19,9 @@ import SearchField from '@/app/_components/SearchField';
 //ニュース表示数の上限設定
 import { NEWS_LIST_LIMIT } from '@/app/_constants';
 
+//更新反映を早めるためキャッシュ保存期間を0にする。これによってレンダリング方式がSSRになる。
+export const revalidate = 0;
+
 export default async function Page() {
   //「microcms.ts」にて読み込んだAPIを「NewsList/index.tsx」にて作成したニュースリストに合体し「contents: news」にて宣言。
   // 「members/page.tsx」と記述が違うのは下記「return」以降のリストについての記述がコンポーネント化されているからだと思われる。
